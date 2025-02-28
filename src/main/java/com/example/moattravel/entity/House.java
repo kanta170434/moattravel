@@ -1,17 +1,17 @@
 package com.example.moattravel.entity;
 
+import java.sql.Timestamp;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "houses")
 @Data
 public class House {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name")
