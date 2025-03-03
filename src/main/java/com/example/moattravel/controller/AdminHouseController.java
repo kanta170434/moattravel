@@ -2,6 +2,7 @@ package com.example.moattravel.controller;
 
 import java.util.List;
 
+import com.example.moattravel.form.HouseRegisterForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -49,5 +50,11 @@ public class AdminHouseController {
         model.addAttribute("house", house);
 
         return "admin/houses/show";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("houseRegisterForm", new HouseRegisterForm());
+        return "admin/houses/register";
     }
 }
