@@ -1,6 +1,7 @@
 package com.example.moattravel.service;
 
 import com.example.moattravel.entity.House;
+import com.example.moattravel.form.HouseEditForm;
 import com.example.moattravel.form.HouseRegisterForm;
 import com.example.moattravel.repository.HouseRepository;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,30 @@ public class HouseService {
         house.setPostalCode(houseRegisterForm.getPostalCode());
         house.setAddress(houseRegisterForm.getAddress());
         house.setPhoneNumber(houseRegisterForm.getPhoneNumber());
+
+        houseRepository.save(house);
+    }
+
+    @Transactional
+    public void update(HouseEditForm houseEditForm) {
+        House house = houseRepository.getReferenceById(houseEditForm.getId());
+        MultipartFile imageFile = houseEditForm.getImageFile();
+
+        if (!imageFile.isEmpty()) {
+            String imageName = imageFile.getOriginalFilename();
+            String hashedImageName = generateNewFileName(imageName);
+            Path filePath = Paths.get("src/main/resources/static/storage/" + hashedImageName);
+            copyImageFile(imageFile, filePath);
+            house.setImageName(hashedImageName);
+        }
+
+        house.setName(houseEditForm.getName());
+        house.setDescription(houseEditForm.getDescription());
+        house.setPrice(houseEditForm.getPrice());
+        house.setCapacity(houseEditForm.getCapacity());
+        house.setPostalCode(houseEditForm.getPostalCode());
+        house.setAddress(houseEditForm.getPostalCode());
+        house.setPhoneNumber(houseEditForm.getPhoneNumber());
 
         houseRepository.save(house);
     }
