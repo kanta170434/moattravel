@@ -1,6 +1,7 @@
 package com.example.moattravel.controller;
 
 import com.example.moattravel.entity.House;
+import com.example.moattravel.form.ReservationInputForm;
 import com.example.moattravel.repository.HouseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -74,6 +75,7 @@ public class HouseController {
         House house = houseRepository.getReferenceById(id);
 
         model.addAttribute("house", house);
+        model.addAttribute("reservationInputForm", new ReservationInputForm());
 
         return "houses/show";
     }
